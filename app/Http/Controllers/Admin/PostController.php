@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin\Post;
-use App\Admin\Models\User;
+use App\User;
 use App\Http\Controllers\Controller;
 use DateTime;
 use Illuminate\Contracts\Validation\Rule;
@@ -25,11 +25,11 @@ class PostController extends Controller
         // $posts = Post::where('user_id', Auth::id())->get(); // ! Ci sono più modi per ottenere i post relativi ad un solo utente
 
         // ! Sfruttiamo la relazione
-        $user = User::findOrFail(Auth::id());
-        $posts = $user->posts;
+        // $user = User::findOrFail(Auth::id());
+        // $posts = $user->posts;
 
-        // ! con questo metodo sfruttiamo il model NON funziona
-        // $posts = Auth::user()->posts;
+        // ! con questo metodo sfruttiamo il model 
+        $posts = Auth::user()->posts;
         // dd(Auth::user()->posts);
 
         return view('admin.posts.index', compact('posts'));
