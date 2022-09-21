@@ -60,17 +60,16 @@
                                 {{ $post->post_date }}
                             </p>
     
-                            <p class="card-text">
+                            {{-- <p class="card-text">
                                 Content:
                                 {{ $post->post_content }}
-                            </p>
+                            </p> --}}
                             <p class="card-text">
                                 Slug
                                 {{ $post->slug }}
                             </p>
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-primary">Show</a>
-    
+                            <div class="d-flex">
+                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-primary m-auto">Show</a>
                             </div>
                         </div>
                     </div>
