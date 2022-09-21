@@ -40,6 +40,7 @@ Route::middleware('auth')
     // ? raggruppa le varie rotte
     ->group(function(){
         Route::get('/home', 'HomeController@index')->name('home');
+        Route::resource('/users', 'UserController');
         Route::resource('/posts', 'PostController');
     });
 

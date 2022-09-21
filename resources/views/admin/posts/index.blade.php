@@ -37,6 +37,7 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
+                                    <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-success">View</a>
                                     <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
 
                                     <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post" class="d-inline">

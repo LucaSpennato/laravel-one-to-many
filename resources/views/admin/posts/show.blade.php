@@ -17,8 +17,12 @@
                     <img src="{{ $post->post_image }}" class="card-img-top" alt="{{ $post->title }}'s image">
                     <div class="card-body">
                         <h5 class="card-subtitle">
-                            Author:
-                            {{ $post->user_id }}
+                            Author id:
+                            Id:{{ $post->user_id }}
+                        </h5>
+                        <h5 class="card-subtitle">
+                            Author name:
+                            Name: {{ $post->user->name }}
                         </h5>
                         <h5 class="card-title">
                             Title:
