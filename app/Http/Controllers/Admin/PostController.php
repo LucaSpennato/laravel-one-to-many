@@ -30,6 +30,7 @@ class PostController extends Controller
 
         // ! con questo metodo sfruttiamo il model NON funziona
         // $posts = Auth::user()->posts;
+        // dd(Auth::user()->posts);
 
         return view('admin.posts.index', compact('posts'));
     }

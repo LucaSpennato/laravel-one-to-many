@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Models\User;
 use App\Admin\Post;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
@@ -15,16 +16,20 @@ class PostSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        // ? Chiamo user, lo salvo in users
+        $users = User::all();
 
         for ($i=0; $i < 50; $i++) { 
             $newpost = new Post();
-            $newpost->author = $faker->userName();
             $newpost->title = $faker->realText(35);
+            // ? Prendiamo users e lo inseriamo nelo user is randomicamente con il faker random element
+            $newpost->user_id = $faker->randomElement($users)->id;
             $newpost->post_image = $faker->imageUrl();
             $newpost->post_date = $faker->dateTimeThisYear();
             $newpost->post_content = $faker->paragraphs(5, true);
             $newpost->slug = Str::slug($newpost->title . ' ' . $i, '-' );
             $newpost->save();
         }
+        
     }
 }
