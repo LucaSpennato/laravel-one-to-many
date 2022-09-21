@@ -13,6 +13,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Admin\Post');
     }
 
+    public function userDetails(){
+        return $this->hasOne('App\Models\UserDetail');
+    }
+
     use Notifiable;
 
     /**
