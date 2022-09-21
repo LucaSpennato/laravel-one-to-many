@@ -21,4 +21,8 @@ class Post extends Model
         'post_date',
         'slug',
     ];
+
+    public function users(){
+        return $this->belongsTo('App\Admin\Models\User');
+    }
 }
