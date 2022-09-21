@@ -69,7 +69,7 @@
                                 {{ $post->slug }}
                             </p>
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-primary">Show</a>
     
                             </div>
                         </div>

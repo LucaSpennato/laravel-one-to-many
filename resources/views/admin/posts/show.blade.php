@@ -42,6 +42,7 @@
                             Slug
                             {{ $post->slug }}
                         </p>
+                        @if ($post->user_id == $idAuth)
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
 
@@ -51,6 +52,8 @@
                                 @method('DELETE')
                                 <input type="submit" value="Delete" class="btn btn-danger d-block m-auto">
                             </form>
+                            
+                        @endif
                         </div>
                     </div>
                 </div>

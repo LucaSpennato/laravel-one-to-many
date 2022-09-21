@@ -30,7 +30,7 @@ class PostController extends Controller
 
         // ! con questo metodo sfruttiamo il model 
         $posts = Auth::user()->posts;
-        // dd(Auth::user()->posts);
+        // dd(Auth::user()->id);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -100,7 +100,9 @@ class PostController extends Controller
         // ?<a href="{{ route('admin.posts.show', $post->id) }}">Nome</a>
         // ! chiedi come far andare la show con URI slug usando la dependency injection!!!
         $post = Post::where('slug', $slug)->first();
-        return view('admin.posts.show', compact('post'));
+
+        $idAuth = Auth::id();
+        return view('admin.posts.show', compact('post', 'idAuth'));
     }
 
     /**
