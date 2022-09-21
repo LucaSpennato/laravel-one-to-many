@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-subtitle">
                             Author:
-                            {{ $post->author }}
+                            {{ $post->user_id }}
                         </h5>
                         <h5 class="card-title">
                             Title:

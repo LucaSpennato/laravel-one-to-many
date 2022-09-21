@@ -57,7 +57,7 @@ class PostController extends Controller
         $newPost = new Post();
 
         // ? Questo permette di usare il nome dell'utente autenticato come nome per la creazione dei propri post
-        $newData['author'] = Auth::user()->name;
+        $newData['user_id'] = Auth::user()->name;
 
         // ? aggiorno lo slug
         $lastPostId = (Post::orderBy('id', 'desc')->first()->id) +1;
