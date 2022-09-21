@@ -31,7 +31,7 @@
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>
                                     <a href="{{ route('admin.posts.show', $post->slug) }}">
-                                        {{ $post->user_id }}
+                                        {{ $post->user->name }}
                                     </a>
                                 </td>
                                 <td>{{ $post->title }}</td>

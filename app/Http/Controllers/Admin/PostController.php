@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin\Post;
+use App\Admin\Models\User;
 use App\Http\Controllers\Controller;
 use DateTime;
 use Illuminate\Contracts\Validation\Rule;
@@ -19,7 +20,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all(); // ! in questo modo vedremmo tutti i post, ma vogliamo visualizzare solo i post del singolo user a cui appartengono
+
+        // $posts = Post::where('user_id', Auth::id())->get(); // ! Ci sono più modi per ottenere i post relativi ad un solo utente
+
+        // ! Sfruttiamo la relazione
+        $user = User::findOrFail(Auth::id());
+        $posts = $user->posts;
+
+        // ! con questo metodo sfruttiamo il model NON funziona
+        // $posts = Auth::user()->posts;
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -58,8 +69,8 @@ class PostController extends Controller
 
         // ? Questo permette di usare il nome dell'utente autenticato come nome per la creazione dei propri post
         $newData['user_id'] = Auth::user()->id;
-        // dd($newData['user_id']);
-        // ? aggiorno lo slug
+
+        // ? aggiorno lo slug, la confizione è necessaria se non ci sono elementi nel db, non sa cosa cercare
         if(isset(Post::orderBy('id', 'desc')->first()->id)){
             $lastPostId = (Post::orderBy('id', 'desc')->first()->id) +1;
         }else{
