@@ -44,7 +44,13 @@
                         </p>
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+
+                            <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post" class="delete-form"
+                                data-name="{{ $post->name }}">
+                                @csrf 
+                                @method('DELETE')
+                                <input type="submit" value="Delete" class="btn btn-danger d-block m-auto">
+                            </form>
                         </div>
                     </div>
                 </div>

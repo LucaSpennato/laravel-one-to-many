@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin\Models\User;
+use App\Admin\Post;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
-        return route('')
+        // dd($users);
+       return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -47,9 +48,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $posts = Post::where('user_id', $user->id)->get();
+        // dd($posts);
+        return view('admin.users.show', compact('user', 'posts'));
     }
 
     /**
@@ -81,8 +84,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        // TODO cerca per mass delete
+        return redirect()->route('admin.users.index')->with('session-change', $user->name . ' è stato eliminato con successo.');
     }
 }

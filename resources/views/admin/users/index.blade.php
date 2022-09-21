@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', '| Posts')
+@section('title', '| Users')
 
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -17,31 +18,27 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
                         </tr>
                         </thead>
                         
                         <tbody>
-                        @forelse ($posts as $post)
+                        @forelse ($users as $user)
                         
                             <tr>
-                                <th scope="row">{{ $post->id }}</th>
+                                <th scope="row">{{ $user->id }}</th>
                                 <td>
-                                    <a href="{{ route('admin.posts.show', $post->slug) }}">
-                                        {{ $post->user->name }}
+                                    <a href="{{ route('admin.users.show', $user->id) }}">
+                                        {{ $user->name }}
                                     </a>
                                 </td>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->post_date }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-success">View</a>
-                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-success">User info</a>
 
-                                    <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post" class="d-inline delete-form"
-                                        data-name="{{ $post->name }}">
+                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="post" class="d-inline delete-form"
+                                        data-name="{{ $user->name }}">
                                         @csrf 
                                         @method('DELETE')
                                         <input type="submit" value="Delete" class="btn btn-danger">
@@ -50,7 +47,7 @@
                             </tr>
                         @empty
                         <h5>
-                            Non ci sono post.
+                            Non ci sono utenti.
                         </h5>
                         @endforelse
                         </tbody>

@@ -44,6 +44,10 @@
                                 <a class="nav-link {{ request()->routeIs('admin.posts.create') ? 'active text-primary' : '' }}"  
                                 href="{{ route('admin.posts.create') }}">New post</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active text-primary' : '' }}"  
+                                href="{{ route('admin.users.index') }}">All Users</a>
+                            </li>
                         @endguest
                     </ul>
 
@@ -88,5 +92,6 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>
