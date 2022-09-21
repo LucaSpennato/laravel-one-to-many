@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DateTime;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -45,7 +46,6 @@ class PostController extends Controller
         $validateData = $request->validate(
             [
                 'title' => 'required|min:2|max:100',
-                'author' => 'required|min:5|max:50',
                 'post_image' => 'required|active_url|max:21844',
                 'post_content' => 'required|min:10|max:21844',
             ],
@@ -55,6 +55,9 @@ class PostController extends Controller
         );
 
         $newPost = new Post();
+
+        // ? Questo permette di usare il nome dell'utente autenticato come nome per la creazione dei propri post
+        $newData['author'] = Auth::user()->name;
 
         // ? aggiorno lo slug
         $lastPostId = (Post::orderBy('id', 'desc')->first()->id) +1;
@@ -119,7 +122,6 @@ class PostController extends Controller
                     // essendo già presente, senza questa regola non verrà aggiornato
                     // Rule::unique('posts')->ignore($upData['title'], 'title'),
                     ],
-                    'author' => 'required|min:5|max:50',
                     'post_image' => 'required|active_url|max:21844',
                     'post_content' => 'required|min:10|max:21844',
             ],
